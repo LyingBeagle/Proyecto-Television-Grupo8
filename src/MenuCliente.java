@@ -12,7 +12,7 @@ public class MenuCliente {
 
         do {
             System.out.println("\n |---------------------------------------------------|");
-            System.out.println(" |                 *Menú de Búsqueda*                |");
+            System.out.println(" |                *Menú de Búsqueda*                |");
             System.out.println(" |---------------------------------------------------|");
             System.out.println("  1. Agregar Cliente");
             System.out.println("  2. Buscar Cliente");
@@ -128,21 +128,3 @@ public class MenuCliente {
                         lector.close();
                     }
                 }
-
-class Cliente {
-    private String rut;
-    private String nombre;
-
-    public Cliente(String rut, String nombre) {
-        this.rut = rut;
-        this.nombre = nombre;
-    }
-
-    public String getRut() {
-        return rut;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-}

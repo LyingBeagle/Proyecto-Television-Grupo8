@@ -1,22 +1,20 @@
 public class Paquete {
-    
     private String[] canales;
     
-    public Paquete(){
+    public Paquete() {
         canales = null;
     }
     
-    public Paquete(int cantidadCanales){
+    public Paquete(int cantidadCanales) {
         canales = new String[cantidadCanales];
     }
     
-    public String[] getCanales(){
+    public String[] getCanales() {
         return canales;
     }
     
-    public void setCanales(String[] canales){
+    public void setCanales(String[] canales) {
         this.canales = canales;
     }
-    
-    
 }
+
