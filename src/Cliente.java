@@ -45,4 +45,10 @@ public class Cliente {
         listaPaquetes.remove(paquete);
     }
     
+    public boolean elementosEnPaquete(){
+        return !listaPaquetes.isEmpty();
+    }
+    
+    
+    
 }
