@@ -9,6 +9,33 @@ public class Main {
         int rut, opcion;
         String nombre;
         
+        Cliente cliente1 = new Cliente("Manolo",32);
+        Cliente cliente2 = new Cliente("Teleforo",51);
+        Cliente cliente3 = new Cliente("Mastonanto",24);
+        
+        String[] canalRecien = {"TVN","MEGA","CHILEVISION"};
+        
+        Paquete paquete1 = new Paquete(canalRecien,10000,"Noticieros");
+        
+        canalRecien = new String[]{"FOX","FOX NEWS"};
+        
+        Paquete paquete2 = new Paquete(canalRecien,15000,"FOXs");
+        
+        canalRecien = new String[]{"SONY","NE","THQ"};
+        
+        Paquete paquete3 = new Paquete(canalRecien,20000,"Peliculas clasicas");
+        
+        cliente1.agregarPaquete(paquete3);
+        cliente2.agregarPaquete(paquete2);
+        cliente2.agregarPaquete(paquete1);
+        cliente3.agregarPaquete(paquete1);
+        cliente3.agregarPaquete(paquete2);
+        cliente3.agregarPaquete(paquete3);
+        
+        tablaClientes.put(32, cliente1);
+        tablaClientes.put(51, cliente2);
+        tablaClientes.put(24, cliente3);
+        
         boolean continuar = true;
 
         do {
@@ -37,7 +64,6 @@ public class Main {
                     
                     System.out.println("Ingrese nombre del cliente:");
                     nombre = lector.readLine();
-                    
 
                     Cliente nuevoCliente = new Cliente(nombre,rut);
                     tablaClientes.put(rut, nuevoCliente);
@@ -104,7 +130,7 @@ public class Main {
                             Paquete paqueteActual = listaPaquetesCliente.get(i);
                            
                             System.out.println("Nombre: " + paqueteActual.getNombrePaquete());
-                            System.out.println("Precio: " + paqueteActual.getPrecio());
+                            System.out.println("Precio: " + paqueteActual.getPrecio() + "$");
                             System.out.println("Canales");
                             System.out.println(Arrays.toString(paqueteActual.getCanales()));
                         }
