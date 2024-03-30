@@ -26,11 +26,18 @@ public class Main {
 
             switch (opcion) {
                 case 1:
+                    
                     System.out.println("Ingrese RUT del cliente:");
                     rut = Integer.parseInt(lector.readLine());
                             
+                    if(tablaClientes.containsKey(rut)){
+                        System.out.println("Ya existe un cliente con ese rut");
+                        break;
+                    }
+                    
                     System.out.println("Ingrese nombre del cliente:");
                     nombre = lector.readLine();
+                    
 
                     Cliente nuevoCliente = new Cliente(nombre,rut);
                     tablaClientes.put(rut, nuevoCliente);
