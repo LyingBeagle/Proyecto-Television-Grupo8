@@ -1,17 +1,21 @@
+import java.util.ArrayList;
+
 public class Cliente {
     
     private String nombre;
     private int rut;
-    private Paquete paquetes;
+    private ArrayList<Paquete> listaPaquetes;
     
     public Cliente(){
         this.nombre = "N/A";
         this.rut = 0;
+        this.listaPaquetes = new ArrayList<>();
     }
     
     public Cliente(String nombre, int rut){
         this.nombre = nombre;
         this.rut = rut;
+        this.listaPaquetes = new ArrayList<>();
     }
     
     public Cliente(int rut, String nombre){
@@ -35,12 +39,16 @@ public class Cliente {
        this.rut = rut;
     }
     
-    public Paquete getPaquetes(){
-        return paquetes;
+    public ArrayList<Paquete> getPaquetes(){
+        return listaPaquetes;
     }
     
-    public void setPaquetes(Paquete paquetes){
-        this.paquetes = paquetes;
+    public void agregarPaquete(Paquete paquete) {
+        listaPaquetes.add(paquete);
     }
-       
+    
+    public void eliminarPaquete(Paquete paquete) {
+        listaPaquetes.remove(paquete);
+    }
+    
 }
