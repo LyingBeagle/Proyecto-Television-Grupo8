@@ -1,5 +1,4 @@
 public class Paquete {
-    
     private String[] canales;
     private int precio;
     private int canalesEnPaquete;
@@ -14,15 +13,15 @@ public class Paquete {
         this.canales = canales;
     }
     
-    public Paquete(int cantidadCanales){
+    public Paquete(int cantidadCanales) {
         canales = new String[cantidadCanales];
     }
     
-    public String[] getCanales(){
+    public String[] getCanales() {
         return canales;
     }
     
-    public void setCanales(String[] canales){
+    public void setCanales(String[] canales) {
         this.canales = canales;
     }
     
@@ -45,3 +44,4 @@ public class Paquete {
     }
     
 }
+

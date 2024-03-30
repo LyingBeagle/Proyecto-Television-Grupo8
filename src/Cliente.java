@@ -1,41 +1,35 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Cliente {
-    
     private String nombre;
     private int rut;
     private ArrayList<Paquete> listaPaquetes;
     
-    public Cliente(){
+    public Cliente() {
         this.nombre = "N/A";
         this.rut = 0;
         this.listaPaquetes = new ArrayList<>();
     }
     
-    public Cliente(String nombre, int rut){
+    public Cliente(String nombre, int rut) {
         this.nombre = nombre;
         this.rut = rut;
         this.listaPaquetes = new ArrayList<>();
     }
     
-    public Cliente(int rut, String nombre){
-        this.nombre = nombre;
-        this.rut = rut;
-    }
-    
-    public String getNombre(){
+    public String getNombre() {
         return nombre;
     }
     
-    public void setNombre(String nombre){
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
     
-    public int getRut(){
+    public int getRut() {
         return rut;
     }
     
-    public void setRut(int rut){
+    public void setRut(int rut) {
        this.rut = rut;
     }
     
