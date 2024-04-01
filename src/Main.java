@@ -40,15 +40,15 @@ public class Main {
 
         do {
             System.out.println("\n |---------------------------------------------------|");
-            System.out.println(" |                *Menú de Búsqueda*                |");
+            System.out.println(" |                *Menu de Busqueda*                |");
             System.out.println(" |---------------------------------------------------|");
             System.out.println("  1. Agregar Cliente");
             System.out.println("  2. Buscar Cliente");
-            System.out.println("  3. Eliminar Cliente");
+            System.out.println("  3. Eliminar Cliente /En Contruccion");
             System.out.println("  4. Mostrar Todos los Clientes");
-            System.out.println("  5. Agregar un paquete a un cliente");
+            System.out.println("  5. Agregar un paquete a un cliente /En Contruccion");
             System.out.println("  0. Salir");
-            System.out.print("\n Elija una opción: ");
+            System.out.print("\n Elija una opcion: ");
             opcion = Integer.parseInt(lector.readLine());
 
             switch (opcion) {
@@ -142,15 +142,26 @@ public class Main {
                     break;
 
                 case 3:
-                   
+                    System.out.println("En Contruccion");
                     break;
 
                 case 4:
                     
+                    Enumeration<Cliente> enumeracion = tablaClientes.elements();
+                    
+                    while(enumeracion.hasMoreElements()){
+                       
+                        Cliente clienteActual = enumeracion.nextElement();
+                        System.out.println("----------");
+                        System.out.println("Nombre: " + clienteActual.getNombre());
+                        System.out.println("Rut: " + clienteActual.getRut());
+                        System.out.println("----------");
+                    }
+                    
                     break;
                 
                 case 5:
-                    
+                    System.out.println("En Contruccion");
                     break;
 
                 case 0:
