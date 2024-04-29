@@ -2,54 +2,30 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    private static final String ARCHIVO_CLIENTES = "clientes.csv";
+    private static Map<Integer, Cliente> tablaClientes = new HashMap<>();
+
+    public static void main(String[] args) {
+        cargarDatos(); // Cargar datos desde el archivo al iniciar la aplicación
+
         BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
-        Hashtable tablaClientes = new Hashtable();
-        
-        int rut, opcion;
+        int opcion, rut;
         String nombre;
-        
-        Cliente cliente1 = new Cliente("Manolo",32);
-        Cliente cliente2 = new Cliente("Teleforo",51);
-        Cliente cliente3 = new Cliente("Mastonanto",24);
-        
-        String[] canalRecien = {"TVN","MEGA","CHILEVISION"};
-        
-        Paquete paquete1 = new Paquete(canalRecien,10000,"Noticieros");
-        
-        canalRecien = new String[]{"FOX","FOX NEWS"};
-        
-        Paquete paquete2 = new Paquete(canalRecien,15000,"FOXs");
-        
-        canalRecien = new String[]{"SONY","NE","THQ"};
-        
-        Paquete paquete3 = new Paquete(canalRecien,20000,"Peliculas clasicas");
-        
-        cliente1.agregarPaquete(paquete3);
-        cliente2.agregarPaquete(paquete2);
-        cliente2.agregarPaquete(paquete1);
-        cliente3.agregarPaquete(paquete1);
-        cliente3.agregarPaquete(paquete2);
-        cliente3.agregarPaquete(paquete3);
-        
-        tablaClientes.put(32, cliente1);
-        tablaClientes.put(51, cliente2);
-        tablaClientes.put(24, cliente3);
-        
         boolean continuar = true;
 
         do {
-            System.out.println("\n |---------------------------------------------------|");
-            System.out.println(" |                *Menu de Busqueda*                |");
-            System.out.println(" |---------------------------------------------------|");
-            System.out.println("  1. Agregar Cliente");
-            System.out.println("  2. Buscar Cliente");
-            System.out.println("  3. Eliminar Cliente /En Contruccion");
-            System.out.println("  4. Mostrar Todos los Clientes");
-            System.out.println("  5. Agregar un paquete a un cliente /En Contruccion");
-            System.out.println("  0. Salir");
-            System.out.print("\n Elija una opcion: ");
-            opcion = Integer.parseInt(lector.readLine());
+            try {
+                System.out.println("\n |---------------------------------------------------|");
+                System.out.println(" |                *Menu de Busqueda*                |");
+                System.out.println(" |---------------------------------------------------|");
+                System.out.println("  1. Agregar Cliente");
+                System.out.println("  2. Buscar Cliente");
+                System.out.println("  3. Eliminar Cliente /En Construccion");
+                System.out.println("  4. Mostrar Todos los Clientes");
+                System.out.println("  5. Agregar un paquete a un cliente /En Construccion");
+                System.out.println("  0. Salir");
+                System.out.print("\n Elija una opcion: ");
+                opcion = Integer.parseInt(lector.readLine());
 
             switch (opcion) {
                 case 1:
@@ -147,7 +123,8 @@ public class Main {
 
                 case 4:
                     
-                    Enumeration<Cliente> enumeracion = tablaClientes.elements();
+                    Enumeration<Cliente> enumeracion = Collections.enumeration(tablaClientes.values());
+
                     
                     while(enumeracion.hasMoreElements()){
                        
@@ -167,14 +144,66 @@ public class Main {
                 case 0:
                         continuar = false;
                         break;
-
-                default:
+                    default:
                         System.out.println("Opción no válida. Intente nuevamente.");
                         break;
-                    }
-                 } while (continuar);
+                }
+            } catch (IOException e) {
+                System.err.println("Error de entrada/salida.");
+                e.printStackTrace();
+            } catch (NumberFormatException e) {
+                System.err.println("Ingrese un número válido.");
+            }
+        } while (continuar);
 
-                        lector.close();
-                    }
-    
+        try {
+            lector.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        guardarDatos();
+    }
+
+    private static void cargarDatos() {
+    try (BufferedReader lector = new BufferedReader(new FileReader(ARCHIVO_CLIENTES))) {
+        String linea;
+        while ((linea = lector.readLine()) != null) {
+            String[] partes = linea.split(",");
+            int rut = Integer.parseInt(partes[0]);
+            String nombre = partes[1];
+            Cliente cliente = new Cliente(nombre, rut);
+            
+            if (partes.length > 2) {
+                for (int i = 2; i < partes.length; i += 3) {
+                    String[] canales = partes[i].split(";"); // Canales separados por ;
+                    int precio = Integer.parseInt(partes[i + 1]);
+                    String nombrePaquete = partes[i + 2];
+                    Paquete paquete = new Paquete(canales, precio, nombrePaquete);
+                    cliente.agregarPaquete(paquete);
+                }
+            }
+            
+            tablaClientes.put(rut, cliente);
+        }
+    } catch (IOException e) {
+        System.err.println("Error al cargar los datos desde el archivo.");
+        e.printStackTrace();
+    }
+}
+
+
+    private static void guardarDatos() {
+        try (BufferedWriter escritor = new BufferedWriter(new FileWriter(ARCHIVO_CLIENTES))) {
+            for (Cliente cliente : tablaClientes.values()) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(cliente.getRut()).append(",");
+                sb.append(cliente.getNombre()).append(",");
+                escritor.write(sb.toString());
+                escritor.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Error al guardar los datos en el archivo.");
+            e.printStackTrace();
+        }
+    }
 }
