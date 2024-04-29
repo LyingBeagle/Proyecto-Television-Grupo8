@@ -1,6 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.io.*;
+import java.util.Arrays;
 import java.util.Hashtable;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -9,7 +10,7 @@ public class ControladorMenu implements ActionListener{
 
     private VentanaMenu view;
     private Hashtable<Integer, Cliente> tablaClientes;
-    
+    private final String ARCHIVO_CLIENTES = "clientes.txt"; // Nombre del archivo de texto
     
     public ControladorMenu(VentanaMenu view){
         this.view = view;
@@ -25,6 +26,7 @@ public class ControladorMenu implements ActionListener{
     }
     
     public void iniciar() throws IOException{
+        cargarDatos(); // Cargar datos desde el archivo al iniciar la aplicación
         view.setTitle("Menu");
         view.setLocationRelativeTo(null);
     }
@@ -83,4 +85,34 @@ public class ControladorMenu implements ActionListener{
         tablaClientes.remove(rut);
     }
     
+    private void cargarDatos() {
+        try (BufferedReader lector = new BufferedReader(new FileReader(ARCHIVO_CLIENTES))) {
+            String linea;
+            while ((linea = lector.readLine()) != null) {
+                String[] partes = linea.split(",");
+                if (partes.length < 4) {
+                    System.out.println("Línea omitida: información incompleta");
+                    System.out.println("Línea completa: " + linea);
+                    continue;
+                }
+                String nombreCliente = partes[0].trim();
+                int rutCliente = Integer.parseInt(partes[1].trim());
+                String nombrePaquete = partes[2].trim();
+                int precioPaquete = Integer.parseInt(partes[3].trim());
+                String[] canales = Arrays.copyOfRange(partes, 4, partes.length);
+                Paquete paquete = new Paquete(canales, precioPaquete, nombrePaquete);
+                Cliente cliente = new Cliente(nombreCliente, rutCliente);
+                cliente.agregarPaquete(paquete);
+                tablaClientes.put(rutCliente, cliente);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar los datos desde el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error al cargar los datos desde el archivo.");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error de formato en el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error de formato en el archivo.");
+        }
+    }
+
+
 }

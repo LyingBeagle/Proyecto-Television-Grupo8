@@ -1,38 +1,19 @@
 import java.util.*;
 
-public class Cliente {
-    private String nombre;
-    private int rut;
+public class Cliente extends Persona{
+    
     private ArrayList<Paquete> listaPaquetes;
     
     public Cliente() {
-        this.nombre = "N/A";
-        this.rut = 0;
+        super();
         this.listaPaquetes = new ArrayList<>();
     }
     
     public Cliente(String nombre, int rut) {
-        this.nombre = nombre;
-        this.rut = rut;
+        super(nombre,rut);
         this.listaPaquetes = new ArrayList<>();
     }
-    
-    public String getNombre() {
-        return nombre;
-    }
-    
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    
-    public int getRut() {
-        return rut;
-    }
-    
-    public void setRut(int rut) {
-       this.rut = rut;
-    }
-    
+     
     public ArrayList<Paquete> getPaquetes(){
         return listaPaquetes;
     }
@@ -48,7 +29,5 @@ public class Cliente {
     public boolean elementosEnPaquete(){
         return !listaPaquetes.isEmpty();
     }
-    
-    
     
 }

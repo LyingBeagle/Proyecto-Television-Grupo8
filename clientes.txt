@@ -1,0 +1,4 @@
+Pepito Mancha,2169473,Caricaturas,2000,CN,Nickelodeon,Disney,
+Manolo Pies,2342,Noticias,1000,Mega,TVN,
+Dena Da,6546,Peliculas Clasicas,5000,Warner,FOX,CC,La red
+Martin,8765,Musica,50,MTV,
