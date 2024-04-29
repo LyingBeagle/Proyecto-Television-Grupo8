@@ -17,6 +17,9 @@ public class ControladorMenu implements ActionListener{
         this.view.btnAgregarCliente.addActionListener(this);
         this.view.btnBuscarCliente.addActionListener(this);
         this.view.btnMostrarClientes.addActionListener(this);
+        this.view.btnEliminarCliente.addActionListener(this);
+        this.view.btnEliminarPaquete.addActionListener(this);
+        this.view.btnAgregarPaquete.addActionListener(this);
         this.view.btnSalir.addActionListener(this);
         
     }
@@ -33,15 +36,27 @@ public class ControladorMenu implements ActionListener{
             VentanaAgregarCliente ventanaAgregarCliente = new VentanaAgregarCliente();
             ControladorAgregarCliente controladorAgregarCliente = new ControladorAgregarCliente(ventanaAgregarCliente, this);
             ventanaAgregarCliente.setVisible(true);
-        } else if(e.getSource() == view.btnBuscarCliente) {
+        } else if(source == view.btnBuscarCliente) {
             VentanaBuscarCliente ventanaBuscarCliente = new VentanaBuscarCliente();
             ControladorBuscarCliente controladorBuscarCliente = new ControladorBuscarCliente(ventanaBuscarCliente, this);
             ventanaBuscarCliente.setVisible(true);
-        } else if(e.getSource() == view.btnMostrarClientes) {
+        } else if(source == view.btnMostrarClientes) {
             VentanaClientes ventanaCliente = new VentanaClientes();
             ControladorMostrarClientes controladorMostrarCliente = new ControladorMostrarClientes(tablaClientes, ventanaCliente);
             ventanaCliente.setVisible(true);
-        } else if(e.getSource() == view.btnSalir) {
+        } else if(source == view.btnEliminarCliente) { 
+            VentanaEliminarCliente ventanaEliminarClientes = new VentanaEliminarCliente();
+            ControladorEliminarCliente controladorEliminarCliente = new ControladorEliminarCliente(ventanaEliminarClientes,this,tablaClientes);
+            ventanaEliminarClientes.setVisible(true);
+        } else if(source == view.btnEliminarPaquete) {
+            VentanaEliminarPaquete ventanaEliminarPaquete = new VentanaEliminarPaquete();
+            ControladorEliminarPaquete controladorEliminarPaquete = new ControladorEliminarPaquete(ventanaEliminarPaquete,this);
+            ventanaEliminarPaquete.setVisible(true);
+        } else if(source == view.btnAgregarPaquete) {
+            VentanaAgregarPaqueteCliente ventanaAgregarPaqueteCliente = new VentanaAgregarPaqueteCliente();
+            ControladorAgregarPaqueteCliente controladorAgregarPaquete = new ControladorAgregarPaqueteCliente(ventanaAgregarPaqueteCliente,this);
+            ventanaAgregarPaqueteCliente.setVisible(true);
+        } else if(source == view.btnSalir) {
             System.exit(0);
         }
             
@@ -62,6 +77,10 @@ public class ControladorMenu implements ActionListener{
         }
         Cliente clienteBuscado = (Cliente)tablaClientes.get(rut);
         return clienteBuscado;
+    }
+    
+    public void eliminarCliente(int rut){
+        tablaClientes.remove(rut);
     }
     
 }

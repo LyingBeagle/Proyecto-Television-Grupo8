@@ -33,6 +33,7 @@ public class VentanaMenu extends javax.swing.JFrame {
         btnMostrarClientes = new javax.swing.JButton();
         btnAgregarPaquete = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        btnEliminarPaquete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +58,8 @@ public class VentanaMenu extends javax.swing.JFrame {
 
         btnSalir.setText("Salir");
 
+        btnEliminarPaquete.setText("Elimnar Paquete a cliente");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,11 +70,14 @@ public class VentanaMenu extends javax.swing.JFrame {
                         .addGap(224, 224, 224)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(203, 203, 203)
+                        .addComponent(btnSalir))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnMostrarClientes)
-                                .addGap(40, 40, 40)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnAgregarPaquete))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnAgregarCliente)
@@ -81,10 +87,8 @@ public class VentanaMenu extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnBuscarCliente)
                                         .addGap(36, 36, 36)
-                                        .addComponent(btnEliminarCliente))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addComponent(btnSalir)))
+                                        .addComponent(btnEliminarCliente))))
+                            .addComponent(btnEliminarPaquete, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,9 +107,11 @@ public class VentanaMenu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnMostrarClientes)
                     .addComponent(btnAgregarPaquete))
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEliminarPaquete)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(btnSalir)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addGap(46, 46, 46))
         );
 
         pack();
@@ -155,6 +161,7 @@ public class VentanaMenu extends javax.swing.JFrame {
     public javax.swing.JButton btnAgregarPaquete;
     public javax.swing.JButton btnBuscarCliente;
     public javax.swing.JButton btnEliminarCliente;
+    public javax.swing.JButton btnEliminarPaquete;
     public javax.swing.JButton btnMostrarClientes;
     public javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
