@@ -22,7 +22,7 @@ public class ControladorMenu implements ActionListener{
         this.view.btnEliminarPaquete.addActionListener(this);
         this.view.btnAgregarPaquete.addActionListener(this);
         this.view.btnSalir.addActionListener(this);
-        
+        this.view.btnNpaquetes.addActionListener(this);
     }
     
     public void iniciar() throws IOException{
@@ -58,6 +58,10 @@ public class ControladorMenu implements ActionListener{
             VentanaAgregarPaqueteCliente ventanaAgregarPaqueteCliente = new VentanaAgregarPaqueteCliente();
             ControladorAgregarPaqueteCliente controladorAgregarPaquete = new ControladorAgregarPaqueteCliente(ventanaAgregarPaqueteCliente,this);
             ventanaAgregarPaqueteCliente.setVisible(true);
+        } else if(source == view.btnNpaquetes) {
+            VentanaRevisionClientes ventanaRevisionClientes = new VentanaRevisionClientes();
+            ControladorRevisionClientes controladorRevisionClientes = new ControladorRevisionClientes(ventanaRevisionClientes,tablaClientes);
+            ventanaRevisionClientes.setVisible(true);
         } else if(source == view.btnSalir) {
             System.exit(0);
         }
