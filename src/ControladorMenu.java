@@ -63,6 +63,7 @@ public class ControladorMenu implements ActionListener{
             ControladorRevisionClientes controladorRevisionClientes = new ControladorRevisionClientes(ventanaRevisionClientes,tablaClientes);
             ventanaRevisionClientes.setVisible(true);
         } else if(source == view.btnSalir) {
+            guardarClientesEnArchivo();
             System.exit(0);
         }
             
@@ -90,33 +91,36 @@ public class ControladorMenu implements ActionListener{
     }
     
     private void cargarDatos() {
-        try (BufferedReader lector = new BufferedReader(new FileReader(ARCHIVO_CLIENTES))) {
-            String linea;
-            while ((linea = lector.readLine()) != null) {
-                String[] partes = linea.split(",");
-                if (partes.length < 4) {
-                    System.out.println("Línea omitida: información incompleta");
-                    System.out.println("Línea completa: " + linea);
-                    continue;
-                }
-                String nombreCliente = partes[0].trim();
-                int rutCliente = Integer.parseInt(partes[1].trim());
-                String nombrePaquete = partes[2].trim();
-                int precioPaquete = Integer.parseInt(partes[3].trim());
-                String[] canales = Arrays.copyOfRange(partes, 4, partes.length);
-                Paquete paquete = new Paquete(canales, precioPaquete, nombrePaquete);
-                Cliente cliente = new Cliente(nombreCliente, rutCliente);
-                cliente.agregarPaquete(paquete);
-                tablaClientes.put(rutCliente, cliente);
+    try (BufferedReader lector = new BufferedReader(new FileReader(ARCHIVO_CLIENTES))) {
+        String linea;
+        while ((linea = lector.readLine()) != null) {
+            String[] partes = linea.split(",");
+            if (partes.length < 2) {
+                continue;
             }
+            String nombreCliente = partes[0].trim();
+            int rutCliente = Integer.parseInt(partes[1].trim());
+            Cliente cliente = new Cliente(nombreCliente, rutCliente);
+            tablaClientes.put(rutCliente, cliente);
+        }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "Error al cargar los datos desde el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
+        System.err.println("Error al cargar los datos desde el archivo.");
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Error de formato en el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
+        System.err.println("Error de formato en el archivo.");
+    }
+}
+
+    private void guardarClientesEnArchivo() {
+        try (BufferedWriter escritor = new BufferedWriter(new FileWriter(ARCHIVO_CLIENTES))) {
+            for (Cliente cliente : tablaClientes.values()) {
+                escritor.write(cliente.getNombre() + "," + cliente.getRut() + ",\n");
+            }
+            JOptionPane.showMessageDialog(view, "Clientes guardados en el archivo " + ARCHIVO_CLIENTES, "Guardado", JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar los datos desde el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
-            System.err.println("Error al cargar los datos desde el archivo.");
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Error de formato en el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
-            System.err.println("Error de formato en el archivo.");
+            JOptionPane.showMessageDialog(view, "Error al guardar los clientes en el archivo.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error al guardar los clientes en el archivo.");
         }
     }
-
-
 }
