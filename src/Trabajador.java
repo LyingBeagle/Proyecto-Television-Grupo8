@@ -1,10 +1,12 @@
-public class Trabajador extends Persona{
+public class Trabajador extends Persona {
     
-    public Trabajador(){
+    // Constructor por defecto
+    public Trabajador() {
         super();
     }
     
-    public Trabajador(String nombre, int rut){
-        super(nombre,rut);
+    // Constructor con parámetros
+    public Trabajador(String nombre, int rut) {
+        super(nombre, rut);
     }
 }
